@@ -60,6 +60,6 @@ group :development, :test do
   gem 'rspec-core', '~> 3.12'
 gem 'rspec-expectations', '~> 3.12'
 gem 'rspec-mocks', '~> 3.12'
-gem 'rspec-support', '~> 3.12'
+gem 'rspec-support', '~> 3.13'
 
 end
