@@ -1,15 +1,11 @@
 <h1>Listings</h1>
 
 <% if @listings.any? %>
-  <ul>
+  <div class="grid">
     <% @listings.each do |l| %>
-      <li>
-        <%= link_to l.title.presence || "Untitled", listing_path(l) %>
-        — $<%= l.price %>
-        (<%= l.reviews.size %> reviews)
-      </li>
+      <%= render partial: "listings/card", locals: { listing: l } %>
     <% end %>
-  </ul>
+  </div>
 <% else %>
   <p>No listings yet.</p>
 <% end %>

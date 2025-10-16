@@ -1,0 +1,22 @@
+<%# locals: listing %>
+<% first_img = listing.images.first&.image_url %>
+
+<div class="card">
+  <% if first_img.present? %>
+    <%= link_to image_tag(first_img, alt: listing.title), listing_path(listing) %>
+  <% else %>
+    <%= link_to image_tag("https://placehold.co/600x400?text=StayBnB", alt: listing.title), listing_path(listing) %>
+  <% end %>
+
+  <div class="card-body">
+    <div class="card-title">
+      <%= link_to (listing.title.presence || "Untitled"), listing_path(listing) %>
+    </div>
+    <p class="card-sub muted"><%= truncate(listing.description.to_s, length: 80) %></p>
+    <div class="price">
+      <%= number_to_currency(listing.price) %> 
+      <span class="muted">/ night</span>
+    </div>
+  </div>
+</div>
+
