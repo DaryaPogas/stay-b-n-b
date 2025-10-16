@@ -1,0 +1,14 @@
+<h1>Bookings for "<%= @listing.title %>"</h1>
+<% if @bookings.any? %>
+  <ul>
+    <% @bookings.each do |b| %>
+      <li>
+        <%= b.start_date %> → <%= b.end_date %>
+        — by <%= b.user&.name %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No bookings.</p>
+<% end %>
+<p><%= link_to "Back to listing", listing_path(@listing) %></p>

@@ -1,0 +1,29 @@
+<h1><%= @listing.title %></h1>
+<p><%= @listing.description %></p>
+<p>Price: $<%= @listing.price %></p>
+<p>Owner: <%= @owner&.name %></p>
+
+<h3>Images</h3>
+<% if @images.any? %>
+  <ul>
+    <% @images.each do |img| %>
+      <li><%= img.image_url %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No images.</p>
+<% end %>
+
+<h3>Recent Reviews</h3>
+<% if @reviews.any? %>
+  <ul>
+    <% @reviews.each do |r| %>
+      <li>
+        <strong><%= r.user&.name %>:</strong>
+        <%= r.rating %> — <%= r.comment %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No reviews.</p>
+<% end %>

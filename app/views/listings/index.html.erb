@@ -1,0 +1,15 @@
+<h1>Listings</h1>
+
+<% if @listings.any? %>
+  <ul>
+    <% @listings.each do |l| %>
+      <li>
+        <%= link_to l.title.presence || "Untitled", listing_path(l) %>
+        — $<%= l.price %>
+        (<%= l.reviews.size %> reviews)
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No listings yet.</p>
+<% end %>

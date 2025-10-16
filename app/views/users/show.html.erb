@@ -1,0 +1,26 @@
+<h1><%= @user.name %></h1>
+<p>Email: <%= @user.email %></p>
+
+<h3>Listings</h3>
+<% if @listings.any? %>
+  <ul>
+    <% @listings.each do |l| %>
+      <li><%= link_to l.title, listing_path(l) %> — $<%= l.price %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No listings.</p>
+<% end %>
+
+<h3>Recent Reviews</h3>
+<% if @reviews.any? %>
+  <ul>
+    <% @reviews.each do |r| %>
+      <li>
+        <em><%= r.listing&.title %></em> — <%= r.rating %>: <%= r.comment %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No reviews.</p>
+<% end %>
