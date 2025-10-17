@@ -1,0 +1,11 @@
+<h1>Users</h1>
+
+<% if @users.any? %>
+  <ul>
+    <% @users.each do |u| %>
+      <li><%= link_to(u.name.presence || "User ##{u.id}", user_path(u)) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No users found.</p>
+<% end %>

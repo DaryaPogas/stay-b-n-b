@@ -1,0 +1,27 @@
+<h1><%= @user.name %></h1>
+<p>Email: <%= @user.email %></p>
+
+<h1><%= @user.name %></h1>
+<p>Email: <%= @user.email %></p>
+
+<h3>Listings</h3>
+<% if @listings.any? %>
+  <div class="grid">
+    <% @listings.each do |l| %>
+      <%= render partial: "listings/card", locals: { listing: l } %>
+    <% end %>
+  </div>
+<% else %>
+  <p class="muted">No listings.</p>
+<% end %>
+
+<h3 style="margin-top:18px;">Recent Reviews</h3>
+<% if @reviews.any? %>
+  <ul>
+    <% @reviews.each do |r| %>
+      <li><em><%= r.listing&.title %></em> — <%= r.rating %>: <%= r.comment %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="muted">No reviews.</p>
+<% end %>

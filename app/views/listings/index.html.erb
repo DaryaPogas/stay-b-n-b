@@ -1,0 +1,11 @@
+<h1>Listings</h1>
+
+<% if @listings.any? %>
+  <div class="grid">
+    <% @listings.each do |l| %>
+      <%= render partial: "listings/card", locals: { listing: l } %>
+    <% end %>
+  </div>
+<% else %>
+  <p>No listings yet.</p>
+<% end %>

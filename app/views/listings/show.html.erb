@@ -1,0 +1,32 @@
+<h1><%= @listing.title %></h1>
+<p class="muted">Owner: <%= @owner&.name %></p>
+
+<p><%= simple_format(@listing.description.to_s) %></p>
+
+<p class="price" style="margin-top:8px;">
+  <%= number_to_currency(@listing.price) %> <span class="muted">/ night</span>
+</p>
+
+<h3 style="margin-top:18px;">Photos</h3>
+<% if @images.any? %>
+  <div class="gallery">
+    <% @images.each do |img| %>
+      <%= image_tag img.image_url, alt: @listing.title %>
+    <% end %>
+  </div>
+<% else %>
+  <p class="muted">No images.</p>
+<% end %>
+
+<h3 style="margin-top:18px;">Recent Reviews</h3>
+<% if @reviews.any? %>
+  <ul>
+    <% @reviews.each do |r| %>
+      <li><strong><%= r.user&.name %></strong> — <%= r.rating %> — <%= r.comment %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="muted">No reviews.</p>
+<% end %>
+
+<p style="margin-top:16px;"><%= link_to "Back to listings", listings_path %></p>

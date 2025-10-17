@@ -1,0 +1,11 @@
+<h1>Images for "<%= @listing.title %>"</h1>
+<% if @images.any? %>
+  <ul>
+    <% @images.each do |img| %>
+      <li><%= img.image_url %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No images.</p>
+<% end %>
+<p><%= link_to "Back to listing", listing_path(@listing) %></p>
