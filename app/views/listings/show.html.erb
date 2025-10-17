@@ -1,4 +1,5 @@
 <h1><%= @listing.title %></h1>
+<p><%= link_to "Edit", edit_listing_path(@listing) %></p>
 <p class="muted">Owner: <%= @owner&.name %></p>
 
 <p><%= simple_format(@listing.description.to_s) %></p>
@@ -30,3 +31,11 @@
 <% end %>
 
 <p style="margin-top:16px;"><%= link_to "Back to listings", listings_path %></p>
+<p><%= link_to "Add Review", new_listing_review_path(@listing) %></p>
+
+<% @reviews.each do |r| %>
+  <li>
+    <strong><%= r.user&.name %></strong> — <%= r.rating %> — <%= r.comment %>
+    (<%= link_to "Edit", edit_listing_review_path(@listing, r) %>)
+  </li>
+<% end %>

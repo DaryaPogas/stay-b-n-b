@@ -1,0 +1,19 @@
+<%= form_with model: [listing, review], local: true do |f| %>
+  <% if review.errors.any? %>
+    <div class="muted"><%= review.errors.full_messages.to_sentence %></div>
+  <% end %>
+
+  <div>
+    <%= f.label :rating %><br>
+    <%= f.text_field :rating, placeholder: "e.g., 4 or 5" %>
+  </div>
+
+  <div>
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment, rows: 3 %>
+  </div>
+
+  <div style="margin-top:10px;">
+    <%= f.submit %>
+  </div>
+<% end %>
