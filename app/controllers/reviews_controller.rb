@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_listing
   before_action :set_review, only: [:edit, :update]
+  before_action :require_login, only: [:new, :create, :edit, :update]
   def index
     @reviews = @listing.reviews.includes(:user).order(created_at: :desc)
   end
@@ -10,7 +11,8 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = @listing.reviews.new(review_params.merge(user: demo_user))
+    @review = @listing.reviews.new(review_params)
+  @review.user = current_user
     if @review.save
       redirect_to listing_path(@listing), notice: "Review added."
     else
@@ -42,9 +44,5 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:rating, :comment)
-  end
-
-  def demo_user
-    User.first || User.create!(name: "Demo", email: "demo@example.com")
   end
 end

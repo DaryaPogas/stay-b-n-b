@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
   def index
     @listings = Listing.includes(:images, :reviews).order(created_at: :desc)
   end
@@ -14,7 +15,8 @@ class ListingsController < ApplicationController
   end
 
  def create
-  @listing = Listing.new(listing_params.except(:image_url).merge(user: demo_user))
+  @listing = Listing.new(listing_params.except(:image_url))
+    @listing.user = current_user
   if @listing.save
     if listing_params[:image_url].present?
       @listing.images.create(image_url: listing_params[:image_url])
@@ -57,9 +59,4 @@ end
   def listing_params
     params.require(:listing).permit(:title, :description, :price, :image_url)
   end
-
-  
-  def demo_user
-    User.first || User.create!(name: "Demo", email: "demo@example.com")
-end
 end

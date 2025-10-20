@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_18_033618) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_20_131722) do
   create_table "bookings", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
@@ -63,6 +63,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_18_033618) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "bookings", "listings"
