@@ -1,0 +1,30 @@
+<%= form_with model: listing, local: true do |f| %>
+  <% if listing.errors.any? %>
+    <div class="muted"><%= listing.errors.full_messages.to_sentence %></div>
+  <% end %>
+
+  <div>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  
+  <div>
+  <%= f.label :image_url, "Image URL" %><br>
+  <%= f.text_field :image_url, placeholder: "https://example.com/photo.jpg" %>
+</div>
+
+
+  <div>
+    <%= f.label :description %><br>
+    <%= f.text_area :description, rows: 4 %>
+  </div>
+
+  <div>
+    <%= f.label :price %><br>
+    <%= f.number_field :price, step: "0.01" %>
+  </div>
+
+  <div style="margin-top:10px;">
+    <%= f.submit %>
+  </div>
+<% end %>
