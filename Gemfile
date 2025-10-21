@@ -59,7 +59,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 8.0'
   gem 'rspec-core', '~> 3.12'
 gem 'rspec-expectations', '~> 3.12'
-gem 'rspec-mocks', '~> 3.12'
+gem 'rspec-mocks', '~> 3.13'
 gem 'rspec-support', '~> 3.12'
 
 end
