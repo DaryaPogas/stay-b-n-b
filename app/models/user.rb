@@ -8,4 +8,9 @@ class User < ApplicationRecord
 
     has_many :reverse_follows, class_name: 'Follow', foreign_key: :followed_user_id, dependent: :destroy
     has_many :followers, through: :reverse_follows, source: :following_user
+
+    validates :name,  presence: true
+  validates :email, presence: true, uniqueness: true
+
+  has_secure_password
 end
