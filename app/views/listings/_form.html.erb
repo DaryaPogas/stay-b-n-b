@@ -1,30 +1,29 @@
 <%= form_with model: listing, local: true do |f| %>
-  <% if listing.errors.any? %>
-    <div class="muted"><%= listing.errors.full_messages.to_sentence %></div>
-  <% end %>
-
   <div>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
-  
-  <div>
-  <%= f.label :image_url, "Image URL" %><br>
-  <%= f.text_field :image_url, placeholder: "https://example.com/photo.jpg" %>
-</div>
-
 
   <div>
     <%= f.label :description %><br>
-    <%= f.text_area :description, rows: 4 %>
+    <%= f.text_area :description %>
   </div>
 
   <div>
     <%= f.label :price %><br>
-    <%= f.number_field :price, step: "0.01" %>
+    <%= f.number_field :price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= f.label :image_url, "Image URL" %><br>
+    <%= f.text_field :image_url %>
   </div>
 
   <div style="margin-top:10px;">
-    <%= f.submit %>
+    <%= f.submit (listing.new_record? ? "Create Listing" : "Update Listing"), class: "btn" %>
   </div>
 <% end %>
+
+<p style="margin-top:10px;">
+  <%= link_to "Back", (listing.new_record? ? listings_path : listing_path(listing)), class: "btn-ghost" %>
+</p>

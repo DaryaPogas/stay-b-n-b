@@ -1,5 +1,9 @@
 <h1><%= @listing.title %></h1>
-<p><%= link_to "Edit", edit_listing_path(@listing) %></p>
+
+<% if logged_in? && current_user.id == @owner&.id %>
+  <p><%= link_to "Edit", edit_listing_path(@listing), class:"btn" %></p>
+<% end %>
+
 <p class="muted">Owner: <%= @owner&.name %></p>
 
 <p><%= simple_format(@listing.description.to_s) %></p>
@@ -19,23 +23,39 @@
   <p class="muted">No images.</p>
 <% end %>
 
+<h3 style="margin-top:18px;">Bookings</h3>
+<p><%= link_to "View all bookings", listing_bookings_path(@listing), class: "btn-ghost" %>
+   <% if logged_in? %> | <%= link_to "New Booking", new_listing_booking_path(@listing), class: "btn", style: "margin-left:8px" %><% end %></p>
+
+<% recent_bookings = @listing.bookings.includes(:user).order(start_date: :asc).limit(5) %>
+<% if recent_bookings.any? %>
+  <ul>
+    <% recent_bookings.each do |b| %>
+      <li>
+        <%= b.start_date %> → <%= b.end_date %> — <em><%= b.user&.name %></em>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="muted">No bookings yet.</p>
+<% end %>
+
+
 <h3 style="margin-top:18px;">Recent Reviews</h3>
 <% if @reviews.any? %>
   <ul>
     <% @reviews.each do |r| %>
-      <li><strong><%= r.user&.name %></strong> — <%= r.rating %> — <%= r.comment %></li>
+      <li>
+        <strong><%= r.user&.name %></strong> — <%= r.rating %> — <%= r.comment %>
+        <% if logged_in? && r.user_id == current_user&.id %>
+          (<%= link_to "Edit", edit_listing_review_path(@listing, r) %>)
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% else %>
   <p class="muted">No reviews.</p>
 <% end %>
 
-<p style="margin-top:16px;"><%= link_to "Back to listings", listings_path %></p>
-<p><%= link_to "Add Review", new_listing_review_path(@listing) %></p>
-
-<% @reviews.each do |r| %>
-  <li>
-    <strong><%= r.user&.name %></strong> — <%= r.rating %> — <%= r.comment %>
-    (<%= link_to "Edit", edit_listing_review_path(@listing, r) %>)
-  </li>
-<% end %>
+<p style="margin-top:16px;"><%= link_to "Back to listings", listings_path, class: "btn-ghost" %></p>
+<p><%= link_to "Add Review", new_listing_review_path(@listing), class: "btn", style: "margin-left:8px" %></p>

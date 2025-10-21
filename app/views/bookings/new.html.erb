@@ -1,0 +1,3 @@
+<h1>New Booking for "<%= @listing.title %>"</h1>
+<%= render "form", listing: @listing, booking: @booking %>
+<p><%= link_to "Back", listing_bookings_path(@listing), class: "btn-ghost" %></p>

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :listings do
     resources :images,   only: [:index]   # /listings/:listing_id/images
     resources :reviews,  only: [:index, :new, :create, :edit, :update]   # /listings/:listing_id/reviews
-    resources :bookings, only: [:index]   # /listings/:listing_id/bookings
+    resources :bookings, only: [:index, :new, :create, :destroy]   # /listings/:listing_id/bookings
   end
 
   resources :users, only: [:index, :show]
