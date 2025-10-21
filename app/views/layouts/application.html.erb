@@ -8,30 +8,29 @@
     <%= stylesheet_link_tag "application", media: "all" %>
   </head>
   <body>
-    <header>
-      <h1><%= link_to "StayBnB", root_path %></h1>
-      <nav>
-        <%= link_to "Listings", listings_path %> |
-        <%= link_to "Users", users_path %>
-        <% if logged_in? %>
-    Logged in as <strong><%= current_user.name %></strong> —
-    <%= button_to "Logout", logout_path, method: :delete, form: { style: "display:inline" } %>
-  <% else %>
-    <%= link_to "Login", login_path %>
-  <% end %>
-      </nav>
+    <header class="topbar">
+      <div class="wrap">
+        <h1 class="brand"><%= link_to "StayBnB", root_path %></h1>
+        <nav class="nav">
+          <%= link_to "Listings", listings_path, class: "nav-link" %>
+          <%= link_to "Users", users_path, class: "nav-link" %>
+          <% if logged_in? %>
+            <span class="nav-muted">Logged in as <strong><%= current_user.name %></strong></span>
+            <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-ghost", form: { class: "inline" } %>
+          <% else %>
+            <%= link_to "Login", login_path, class: "btn" %>
+          <% end %>
+        </nav>
+      </div>
     </header>
 
-    <% if notice.present? %>
-  <div class="notice"><%= notice %></div>
-<% end %>
-<% if alert.present? %>
-  <div class="alert"><%= alert %></div>
-<% end %>
+    <div class="wrap">
+      <% if notice.present? %><div class="alert alert-success"><%= notice %></div><% end %>
+      <% if alert.present?  %><div class="alert alert-danger"><%= alert %></div><% end %>
 
-
-    <main>
-      <%= yield %>
-    </main>
+      <main class="card page">
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>

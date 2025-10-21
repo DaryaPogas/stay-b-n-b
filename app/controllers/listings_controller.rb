@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authorize_owner!, only: [:edit, :update, :destroy]
   def index
     @listings = Listing.includes(:images, :reviews).order(created_at: :desc)
   end
@@ -58,5 +59,9 @@ end
 
   def listing_params
     params.require(:listing).permit(:title, :description, :price, :image_url)
+  end
+
+  def authorize_owner!
+    head :forbidden unless current_user && @listing.user_id == current_user.id
   end
 end
