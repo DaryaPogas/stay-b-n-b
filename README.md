@@ -50,3 +50,7 @@ alex@gmail.com - password: 'secret'
 ✨ Author
 Darya Pogas
 Final Project — Code the Dream, 2025
+
+<img width="890" height="858" alt="Screenshot 2025-10-21 at 12 07 23 PM" src="https://github.com/user-attachments/assets/2e67604d-a605-44af-a34e-d945d1758eb3" />
+<img width="723" height="865" alt="Screenshot 2025-10-21 at 12 07 51 PM" src="https://github.com/user-attachments/assets/d0b79a47-12d9-43bf-b27f-1288588713ac" />
+
