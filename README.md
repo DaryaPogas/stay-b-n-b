@@ -27,10 +27,15 @@ Users can sign up, log in, create listings, make bookings, and leave reviews.
 ### 💡 Setup Instructions
 
 git clone https://github.com/<your-username>/stay-b-n-b.git
+
 cd stay-b-n-b
+
 bundle install
+
 bin/rails db:reset
+
 bin/rails server
+
 Then open:
 👉 http://localhost:3000
 
